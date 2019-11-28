@@ -26,6 +26,14 @@
 	</header>
 	<p>${recette.description}</p>
 </article>
+<form name="tag" method="post" action="recette?id=<c:out value="${recette.id}" />">
+                 <SELECT
+                    name="tag" id="tag" class="select">
+                    <c:forEach items="${tags}" var="tag">
+                        <OPTION value="${tag.id}"><c:out value="${tag.nom}" /><c:out value="${tag.auteur}" />
+                    </c:forEach>
+                </SELECT> <input type="submit" name="AddTag" value="Ajouter" class="submitBtn" />
+            </form>
 <hr />
 <header>
 	<h2 id="titreIngredient">Ingrédients</h2>
@@ -63,7 +71,7 @@ nom *"
 		<option value="3">3</option>
 		<option value="4">4</option>
 		<option value="5">5</option>
-	</select> <br /> <input type="submit" value="Commenter" class="submitBtn" />
+	</select> <br /> <input type="submit" name="AddComment" value="Commenter" class="submitBtn" />
 </form>
 <div id="erreur">
 	<p>Erreurs</p>

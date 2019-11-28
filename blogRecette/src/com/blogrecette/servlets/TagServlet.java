@@ -43,6 +43,7 @@ public class TagServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String nomTag = request.getParameter("name");
+		String auteurTag = request.getParameter("auteur");
 		String info = "";
 
 		if (nomTag.isEmpty()) {
@@ -50,7 +51,7 @@ public class TagServlet extends HttpServlet {
 		}
 
 		TagService tagService = new TagService();
-		Tag tag = new Tag(nomTag);
+		Tag tag = new Tag(nomTag, auteurTag);
 
 		tagService.createTag(tag);
 

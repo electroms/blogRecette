@@ -13,11 +13,16 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.tool.schema.internal.exec.GenerationTarget;
+
+import com.blogrecette.servlets.DeleteTagServlet;
 
 /**
  * @author Pierre-Henry Barge
@@ -56,6 +61,8 @@ public class Recette {
 	private Categorie categorie;
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Membre membre;
+	@ManyToMany(fetch = FetchType.EAGER)
+	private Collection<Tag> tags;
 	public Recette() {
 		this.commentaires = new ArrayList<Commentaire>();
 
@@ -69,6 +76,7 @@ public class Recette {
 		this.dateCreation = dateCreation;
 		this.ingredients = new ArrayList<Ingredient>();
 		this.commentaires= new ArrayList<Commentaire>();
+		this.tags = new ArrayList<Tag>();
 	}
 	/**
 	 * @return the id
@@ -155,8 +163,17 @@ public class Recette {
 	public Collection<Ingredient> getIngredient() {
 		return this.ingredients;
 	}
-
-
+	public Collection<Tag> addTag(Tag tag) {
+		tags.add(tag);
+		return tags;
+	}
+	public Collection<Tag> DeleteTag(Tag tag) {
+		tags.remove(tag);
+		return tags;
+	}
+	public Collection<Tag> getTag() {
+		return tags;
+	}
 
 	@Override
 	public String toString() {
